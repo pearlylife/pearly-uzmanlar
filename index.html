@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menopoz Alanında Türkiye'nin Bilimsel Haritası — Pearly</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
+  :root {
+    --rose: #C84B7A; --rose-light: #E8809E; --blush: #F9D6E0; --blush-mid: #F2A6BC;
+    --cream: #FFF7F2; --warm-white: #FFFBF8; --peach: #F5C2A0; --coral: #E8866A;
+    --text-dark: #2A1520; --text-mid: #6B3A50; --text-light: #9C6E7E;
+    --border: rgba(200, 75, 122, 0.15);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--warm-white); color: var(--text-dark); min-height: 100vh; }
+
+  .hero { background: linear-gradient(135deg, #C84B7A 0%, #E0628F 30%, #F0A0B8 60%, #F5C2A0 100%); padding: 56px 48px 48px; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 20%, rgba(255,255,255,0.18) 0%, transparent 60%), radial-gradient(ellipse at 20% 80%, rgba(255,200,150,0.2) 0%, transparent 50%); }
+  .hero-inner { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(28px, 4vw, 52px); color: #fff; line-height: 1.15; font-weight: 700; text-shadow: 0 2px 20px rgba(100,10,40,0.2); }
+  .hero h1 em { font-style: italic; font-weight: 400; }
+  .hero-badge { background: rgba(255,255,255,0.22); border: 1.5px solid rgba(255,255,255,0.45); border-radius: 40px; padding: 10px 22px; color: #fff; font-size: 13px; font-weight: 500; letter-spacing: 0.05em; backdrop-filter: blur(8px); white-space: nowrap; text-decoration: none; }
+  .hero-sub { color: rgba(255,255,255,0.85); font-size: 15px; margin-top: 10px; max-width: 520px; line-height: 1.6; }
+
+  .controls-wrap { background: #fff; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 16px rgba(200,75,122,0.07); }
+  .controls { max-width: 1200px; margin: 0 auto; padding: 14px 32px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .search-wrap { position: relative; flex: 1; min-width: 200px; }
+  .search-wrap input { width: 100%; padding: 9px 16px 9px 40px; border: 1.5px solid var(--border); border-radius: 30px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--text-dark); background: var(--cream); outline: none; transition: border-color 0.2s; }
+  .search-wrap input:focus { border-color: var(--rose-light); }
+  .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-light); }
+  .filter-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+  .pill { padding: 7px 16px; border-radius: 20px; border: 1.5px solid var(--border); background: transparent; font-family: 'DM Sans', sans-serif; font-size: 12.5px; color: var(--text-mid); cursor: pointer; transition: all 0.18s; font-weight: 500; }
+  .pill:hover { background: var(--blush); border-color: var(--rose-light); color: var(--rose); }
+  .pill.active { background: var(--rose); border-color: var(--rose); color: #fff; }
+
+  .stats-bar { background: linear-gradient(90deg, var(--blush) 0%, #FDE8D4 100%); border-bottom: 1px solid var(--border); }
+  .stats-inner { max-width: 1200px; margin: 0 auto; padding: 12px 32px; display: flex; gap: 32px; flex-wrap: wrap; align-items: center; }
+  .stat { display: flex; align-items: center; gap: 8px; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--rose); }
+  .stat-lbl { font-size: 12px; color: var(--text-mid); font-weight: 500; line-height: 1.3; }
+  .stat-divider { width: 1px; background: var(--border); align-self: stretch; min-height: 32px; }
+
+  .grid-wrap { max-width: 1200px; margin: 0 auto; padding: 32px; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rose); margin: 28px 0 16px; display: flex; align-items: center; gap: 10px; }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px; }
+
+  .card { background: #fff; border: 1.5px solid var(--border); border-radius: 20px; padding: 22px; transition: all 0.22s ease; position: relative; overflow: hidden; }
+  .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--rose), var(--peach)); opacity: 0; transition: opacity 0.2s; }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(200,75,122,0.12); border-color: var(--rose-light); }
+  .card:hover::before { opacity: 1; }
+  .card.hidden { display: none; }
+
+  .card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
+  .card-avatar { width: 46px; height: 46px; border-radius: 50%; background: linear-gradient(135deg, var(--rose) 0%, var(--peach) 100%); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 17px; color: #fff; font-weight: 600; flex-shrink: 0; }
+  .card-name-block { flex: 1; }
+  .card-name { font-family: 'Playfair Display', serif; font-size: 15.5px; font-weight: 700; color: var(--text-dark); line-height: 1.3; }
+  .card-branch { display: inline-block; margin-top: 5px; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; background: var(--blush); color: var(--rose); }
+  .card-meta { font-size: 12.5px; color: var(--text-light); margin-bottom: 10px; display: flex; align-items: center; gap: 5px; }
+  .card-desc { font-size: 13.5px; color: var(--text-mid); line-height: 1.6; margin-bottom: 14px; }
+  .card-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+  .tag { padding: 3px 9px; background: var(--cream); border: 1px solid var(--border); border-radius: 8px; font-size: 11px; color: var(--text-mid); font-weight: 500; }
+  .card-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 12px; }
+  .social-links { display: flex; gap: 8px; }
+  .social-link { display: flex; align-items: center; gap: 5px; padding: 5px 10px; background: var(--cream); border: 1px solid var(--border); border-radius: 10px; font-size: 11.5px; color: var(--rose); text-decoration: none; font-weight: 500; transition: all 0.15s; }
+  .social-link:hover { background: var(--blush); }
+  .davet-badge { padding: 4px 11px; border-radius: 10px; font-size: 11px; font-weight: 600; }
+  .davet-yuksek { background: #FDEAF0; color: #C84B7A; }
+  .davet-orta { background: #FEF3E2; color: #C0780A; }
+  .davet-bilgi { background: #EAF5F2; color: #1A8C6A; }
+  .followers { font-size: 12px; color: var(--rose); font-weight: 600; }
+
+  .delete-btn { position: absolute; top: 12px; right: 12px; width: 26px; height: 26px; border-radius: 50%; border: 1px solid #fcc; background: #fff0f0; color: #c0392b; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.2s; }
+  .card:hover .delete-btn { opacity: 1; }
+
+  .loading { text-align: center; padding: 60px; color: var(--text-light); font-size: 15px; }
+  .loading-spinner { width: 36px; height: 36px; border: 3px solid var(--blush); border-top-color: var(--rose); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .empty { text-align: center; padding: 60px 20px; color: var(--text-light); }
+
+  /* FAB */
+  .fab { position: fixed; bottom: 32px; right: 32px; background: linear-gradient(135deg, var(--rose), var(--coral)); color: #fff; border: none; border-radius: 28px; padding: 14px 24px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; box-shadow: 0 8px 28px rgba(200,75,122,0.4); display: flex; align-items: center; gap: 8px; z-index: 200; transition: transform 0.18s, box-shadow 0.18s; }
+  .fab:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(200,75,122,0.5); }
+
+  /* MODAL */
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(42,21,32,0.55); backdrop-filter: blur(4px); z-index: 300; align-items: center; justify-content: center; padding: 20px; }
+  .modal-overlay.open { display: flex; }
+  .modal { background: #fff; border-radius: 24px; padding: 36px; width: 100%; max-width: 560px; max-height: 90vh; overflow-y: auto; box-shadow: 0 24px 64px rgba(42,21,32,0.25); animation: slideUp 0.25s ease; }
+  @keyframes slideUp { from { transform: translateY(24px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+  .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; }
+  .modal-header h2 { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--text-dark); }
+  .modal-close { width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid var(--border); background: var(--cream); cursor: pointer; font-size: 18px; color: var(--text-mid); display: flex; align-items: center; justify-content: center; transition: background 0.15s; }
+  .modal-close:hover { background: var(--blush); }
+  .form-row { margin-bottom: 18px; }
+  .form-row label { display: block; font-size: 12px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text-mid); margin-bottom: 7px; }
+  .form-row input, .form-row select, .form-row textarea { width: 100%; padding: 10px 14px; border: 1.5px solid var(--border); border-radius: 12px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--text-dark); background: var(--cream); outline: none; transition: border-color 0.18s; resize: vertical; }
+  .form-row input:focus, .form-row select:focus, .form-row textarea:focus { border-color: var(--rose-light); background: #fff; }
+  .form-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .form-submit { width: 100%; padding: 13px; background: linear-gradient(135deg, var(--rose), var(--coral)); color: #fff; border: none; border-radius: 14px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 8px; transition: opacity 0.18s; }
+  .form-submit:hover { opacity: 0.9; }
+  .form-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+  .toast { position: fixed; bottom: 100px; right: 32px; background: #2A1520; color: #fff; padding: 12px 22px; border-radius: 14px; font-size: 14px; font-weight: 500; z-index: 400; opacity: 0; transform: translateY(10px); transition: all 0.3s; pointer-events: none; }
+  .toast.show { opacity: 1; transform: translateY(0); }
+
+  footer { background: linear-gradient(135deg, #2A1520 0%, #4A1E35 100%); color: rgba(255,255,255,0.6); text-align: center; padding: 28px 32px; font-size: 13px; margin-top: 40px; }
+  footer strong { color: var(--blush-mid); }
+
+  @media (max-width: 600px) {
+    .hero { padding: 36px 20px 32px; }
+    .controls { padding: 12px 16px; }
+    .grid-wrap { padding: 20px 16px; }
+    .grid { grid-template-columns: 1fr; }
+    .form-two-col { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.7);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:10px;font-weight:600;">Pearly · Menopoz Platformu</div>
+      <h1>Menopoz Alanında<br><em>Türkiye'nin</em> Bilimsel Haritası</h1>
+      <p class="hero-sub">Multidisipliner yaklaşımla menopoz dönemini destekleyen Türkiye'nin öncü uzmanları.</p>
+    </div>
+    <a class="hero-badge" href="https://www.pearly.life" target="_blank">pearly.life</a>
+  </div>
+</div>
+
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat"><span class="stat-num" id="total-count">—</span><span class="stat-lbl">Toplam<br>Uzman</span></div>
+    <div class="stat-divider"></div>
+    <div class="stat"><span class="stat-num" id="visible-count">—</span><span class="stat-lbl">Görüntülenen<br>Uzman</span></div>
+  </div>
+</div>
+
+<div class="controls-wrap">
+  <div class="controls">
+    <div class="search-wrap">
+      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <input type="text" id="search" placeholder="İsim veya uzmanlık ara..." oninput="filterCards()">
+    </div>
+    <div class="filter-pills">
+      <button class="pill active" onclick="filterBranch('all', this)">Tümü</button>
+      <button class="pill" onclick="filterBranch('jinekolog', this)">Jinekolog</button>
+      <button class="pill" onclick="filterBranch('endokrinoloji', this)">Endokrinoloji</button>
+      <button class="pill" onclick="filterBranch('kardiyolog', this)">Kardiyolog</button>
+      <button class="pill" onclick="filterBranch('psikolog', this)">Psikolog</button>
+      <button class="pill" onclick="filterBranch('diyetisyen', this)">Diyetisyen</button>
+      <button class="pill" onclick="filterBranch('fizyoterapist', this)">Fizyoterapist</button>
+      <button class="pill" onclick="filterBranch('dermatoloji', this)">Dermatoloji</button>
+      <button class="pill" onclick="filterBranch('diger', this)">Diğer</button>
+    </div>
+  </div>
+</div>
+
+<div class="grid-wrap">
+  <div id="loading" class="loading"><div class="loading-spinner"></div>Uzmanlar yükleniyor...</div>
+  <div id="cards-container"></div>
+  <div id="no-results" class="empty" style="display:none;">
+    <div style="font-size:32px;">🌸</div>
+    <p>Bu kriterlere uygun uzman bulunamadı.</p>
+  </div>
+</div>
+
+<button class="fab" onclick="openModal()">
+  <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+  Uzman Ekle
+</button>
+
+<div class="toast" id="toast"></div>
+
+<div class="modal-overlay" id="modal-overlay" onclick="closeOnOverlay(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>Yeni Uzman Ekle</h2>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="form-two-col">
+      <div class="form-row"><label>Ad Soyad *</label><input type="text" id="f-name" placeholder="Prof. Dr. Ad Soyad"></div>
+      <div class="form-row"><label>Uzmanlık Branşı *</label>
+        <select id="f-branch">
+          <option value="jinekolog">Jinekolog</option>
+          <option value="endokrinoloji">Endokrinoloji</option>
+          <option value="kardiyolog">Kardiyolog</option>
+          <option value="psikolog">Psikolog / Psikiyatrist</option>
+          <option value="diyetisyen">Diyetisyen</option>
+          <option value="fizyoterapist">Fizyoterapist</option>
+          <option value="dermatoloji">Dermatoloji</option>
+          <option value="diger">Diğer</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-two-col">
+      <div class="form-row"><label>Branş Etiketi</label><input type="text" id="f-branch-label" placeholder="örn. Pelvik Taban Fizyoterapisti"></div>
+      <div class="form-row"><label>Şehir / Kurum</label><input type="text" id="f-city" placeholder="İstanbul / Hacettepe"></div>
+    </div>
+    <div class="form-row"><label>Kısa Açıklama *</label><textarea id="f-desc" rows="3" placeholder="Uzmanlık alanı, menopozla ilişkili çalışmaları..."></textarea></div>
+    <div class="form-row"><label>Etiketler (virgülle ayır)</label><input type="text" id="f-tags" placeholder="HRT, Seminer, Yüksek Takipçi"></div>
+    <div class="form-two-col">
+      <div class="form-row"><label>Instagram</label><input type="text" id="f-instagram" placeholder="@kullanici_adi"></div>
+      <div class="form-row"><label>Takipçi Sayısı</label><input type="text" id="f-followers" placeholder="örn. 85K"></div>
+    </div>
+    <div class="form-row"><label>Davet Önceliği</label>
+      <select id="f-priority">
+        <option value="yuksek">⭐ Yüksek Öncelik</option>
+        <option value="orta">Orta Öncelik</option>
+        <option value="bilgi">Araştırılmalı / Bilgi</option>
+      </select>
+    </div>
+    <button class="form-submit" id="submit-btn" onclick="addExpert()">Uzmanı Listeye Ekle</button>
+  </div>
+</div>
+
+<footer>
+  <strong>Pearly</strong> · Menopoz Platformu · <a href="https://www.pearly.life" target="_blank" style="color:var(--blush-mid);text-decoration:none;">pearly.life</a> &nbsp;|&nbsp; Bu belge Pearly için hazırlanmıştır.
+</footer>
+
+<script>
+const AT_TOKEN = 'patpyhYMbLLLKWY5c.774b756fa381cf0de823b3abf2739ea33b65fa2d4f738e4af33550235ef5af15';
+const AT_BASE  = 'appqKQHLK8cCQp5CY';
+const AT_TABLE = 'tblLevQWYmxgjMFzy';
+const AT_URL   = `https://api.airtable.com/v0/${AT_BASE}/${AT_TABLE}`;
+const HEADERS  = { 'Authorization': `Bearer ${AT_TOKEN}`, 'Content-Type': 'application/json' };
+
+let allExperts = [];
+let activeBranch = 'all';
+
+/* ── LOAD ── */
+async function loadExperts() {
+  try {
+    let records = [], offset = null;
+    do {
+      const url = AT_URL + '?pageSize=100' + (offset ? '&offset=' + offset : '');
+      const res = await fetch(url, { headers: HEADERS });
+      const data = await res.json();
+      if (data.error) throw new Error(data.error.message);
+      records = records.concat(data.records);
+      offset = data.offset || null;
+    } while (offset);
+
+    allExperts = records.map(r => ({ id: r.id, ...r.fields }));
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('total-count').textContent = allExperts.length;
+    renderCards();
+  } catch (e) {
+    document.getElementById('loading').innerHTML = '⚠️ Uzmanlar yüklenemedi: ' + e.message;
+  }
+}
+
+/* ── RENDER ── */
+function renderCards() {
+  const query = document.getElementById('search').value.toLowerCase();
+  const container = document.getElementById('cards-container');
+  container.innerHTML = '';
+
+  const branchOrder = ['jinekolog','endokrinoloji','kardiyolog','dermatoloji','psikolog','diyetisyen','fizyoterapist','diger'];
+  const branchLabels = { jinekolog:'Kadın Hastalıkları ve Doğum (Jinekolog)', endokrinoloji:'Endokrinoloji & Metabolizma', kardiyolog:'Kardiyoloji', dermatoloji:'Dermatoloji', psikolog:'Psikolog / Psikiyatrist / Cinsel Terapi', diyetisyen:'Diyetisyen & Beslenme', fizyoterapist:'Fizyoterapi & Pelvik Taban', diger:'Diğer Uzmanlar' };
+
+  const filtered = allExperts.filter(e => {
+    const b = (e['Brans'] || '').toLowerCase();
+    const branchMatch = activeBranch === 'all' || b === activeBranch;
+    const searchMatch = !query || JSON.stringify(e).toLowerCase().includes(query);
+    return branchMatch && searchMatch;
+  });
+
+  document.getElementById('visible-count').textContent = filtered.length;
+  document.getElementById('no-results').style.display = filtered.length === 0 ? 'block' : 'none';
+
+  const groups = {};
+  filtered.forEach(e => {
+    const b = (e['Brans'] || 'diger').toLowerCase();
+    if (!groups[b]) groups[b] = [];
+    groups[b].push(e);
+  });
+
+  const orderedKeys = [...branchOrder.filter(b => groups[b]), ...Object.keys(groups).filter(b => !branchOrder.includes(b))];
+
+  orderedKeys.forEach(branch => {
+    const title = document.createElement('div');
+    title.className = 'section-title';
+    title.textContent = branchLabels[branch] || branch;
+    container.appendChild(title);
+
+    const grid = document.createElement('div');
+    grid.className = 'grid';
+    groups[branch].forEach(e => grid.appendChild(buildCard(e)));
+    container.appendChild(grid);
+  });
+}
+
+function getInitials(name) {
+  return (name || '').split(' ').filter(w => /\w/.test(w)).slice(-2).map(w => w[0].toUpperCase()).join('');
+}
+
+function buildCard(e) {
+  const name     = e['Ad Soyad'] || '';
+  const bransLbl = e['BransEtiketi'] || e['Brans'] || '';
+  const city     = e['Sehir'] || '';
+  const desc     = e['Aciklama'] || '';
+  const tags     = (e['Etiketler'] || '').split(',').filter(Boolean);
+  const ig       = e['Instagram'] || '';
+  const followers= e['Takipci'] || '';
+  const oncelik  = (e['Oncelik'] || 'bilgi').toLowerCase();
+
+  const prioMap = { yuksek: { cls:'davet-yuksek', lbl:'⭐ Yüksek Öncelik' }, orta: { cls:'davet-orta', lbl:'Orta Öncelik' }, bilgi: { cls:'davet-bilgi', lbl:'Araştırılmalı' } };
+  const prio = prioMap[oncelik] || prioMap.bilgi;
+
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.dataset.id = e.id;
+
+  card.innerHTML = `
+    <button class="delete-btn" onclick="deleteExpert('${e.id}', this)" title="Sil">✕</button>
+    <div class="card-header">
+      <div class="card-avatar">${getInitials(name)}</div>
+      <div class="card-name-block">
+        <div class="card-name">${name}</div>
+        <span class="card-branch">${bransLbl}</span>
+      </div>
+      <span class="davet-badge ${prio.cls}">${prio.lbl}</span>
+    </div>
+    ${city ? `<div class="card-meta"><svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>${city}</div>` : ''}
+    <p class="card-desc">${desc}</p>
+    ${tags.length ? `<div class="card-tags">${tags.map(t=>`<span class="tag">${t.trim()}</span>`).join('')}</div>` : ''}
+    <div class="card-footer">
+      <div class="social-links">${ig ? `<a class="social-link" href="${ig.startsWith('http') ? ig : 'https://instagram.com/'+ig.replace('@','')}" target="_blank">📷 Instagram</a>` : ''}</div>
+      ${followers ? `<span class="followers">${followers} takipçi</span>` : ''}
+    </div>
+  `;
+  return card;
+}
+
+/* ── DELETE ── */
+async function deleteExpert(id, btn) {
+  if (!confirm('Bu uzmanı listeden silmek istediğine emin misin?')) return;
+  btn.disabled = true;
+  try {
+    const res = await fetch(`${AT_URL}/${id}`, { method: 'DELETE', headers: HEADERS });
+    const data = await res.json();
+    if (!data.deleted) throw new Error('Silinemedi');
+    allExperts = allExperts.filter(e => e.id !== id);
+    document.getElementById('total-count').textContent = allExperts.length;
+    renderCards();
+    showToast('🗑️ Uzman silindi.');
+  } catch (e) {
+    showToast('⚠️ Silinemedi: ' + e.message);
+    btn.disabled = false;
+  }
+}
+
+/* ── ADD ── */
+async function addExpert() {
+  const name = document.getElementById('f-name').value.trim();
+  const desc = document.getElementById('f-desc').value.trim();
+  if (!name || !desc) { showToast('⚠️ Ad Soyad ve Açıklama zorunludur.'); return; }
+
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'Kaydediliyor...';
+
+  const fields = {
+    'Ad Soyad': name,
+    'Brans': document.getElementById('f-branch').value,
+    'BransEtiketi': document.getElementById('f-branch-label').value.trim() || document.getElementById('f-branch').options[document.getElementById('f-branch').selectedIndex].text,
+    'Sehir': document.getElementById('f-city').value.trim(),
+    'Aciklama': desc,
+    'Etiketler': document.getElementById('f-tags').value.trim(),
+    'Instagram': document.getElementById('f-instagram').value.trim(),
+    'Takipci': document.getElementById('f-followers').value.trim(),
+    'Oncelik': document.getElementById('f-priority').value,
+  };
+
+  try {
+    const res = await fetch(AT_URL, { method: 'POST', headers: HEADERS, body: JSON.stringify({ fields }) });
+    const data = await res.json();
+    if (data.error) throw new Error(data.error.message);
+    allExperts.push({ id: data.id, ...data.fields });
+    document.getElementById('total-count').textContent = allExperts.length;
+    ['f-name','f-branch-label','f-city','f-desc','f-tags','f-instagram','f-followers'].forEach(id => { const el = document.getElementById(id); if(el) el.value=''; });
+    closeModal();
+    renderCards();
+    showToast('✅ ' + name + ' listeye eklendi!');
+  } catch(e) {
+    showToast('⚠️ Eklenemedi: ' + e.message);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Uzmanı Listeye Ekle';
+  }
+}
+
+/* ── FILTER ── */
+function filterBranch(branch, el) {
+  activeBranch = branch;
+  document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  renderCards();
+}
+function filterCards() { renderCards(); }
+
+/* ── MODAL ── */
+function openModal() { document.getElementById('modal-overlay').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeModal() { document.getElementById('modal-overlay').classList.remove('open'); document.body.style.overflow=''; }
+function closeOnOverlay(e) { if(e.target===document.getElementById('modal-overlay')) closeModal(); }
+
+/* ── TOAST ── */
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+loadExperts();
+</script>
+</body>
+</html>
